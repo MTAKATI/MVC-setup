@@ -12,7 +12,7 @@ const postSchema = mongoose.Schema(
             maxLenght: 280,
         },
         image: {
-            type: Blob,
+            type: String,
             default: "",
         },
         likes: [
