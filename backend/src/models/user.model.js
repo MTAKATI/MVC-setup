@@ -26,7 +26,7 @@ const userShema = new mongoose.Schema(
             required: true,
         },
         bannerImage: {
-            type: Blob,
+            type: String,
             required: true,
         },
         bio: {
