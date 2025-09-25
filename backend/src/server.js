@@ -3,6 +3,7 @@ import cors from "cors";    //allow request made by the front-end: {Cross-Origin
 import {clerkMiddleware} from "@clerk/express";     //supports the authentication
 
 import userRoutes from  './routes/user.route.js';
+import postRoutes from  './routes/post.route.js';
 
 import {ENV} from "./config/env.js";
 import { connectDB } from "./config/db.js";
@@ -18,6 +19,15 @@ app.get("/", (req, res) => res.send("Hello form server"));
 
 {/** User Routes */}
 app.use("/api/users", userRoutes);
+{/** Post Routes */}
+app.use("/api/posts", postRoutes);
+
+{/** Error handling middleware */}
+//For debugging purposes
+app.use((err, req, res) => {
+    console.log("Unlimited error:", err);
+    res.status(500).json({error: err.message || "Internal server error"});
+})
 
 const startServer = async() => {
     try {
