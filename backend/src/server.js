@@ -4,6 +4,7 @@ import {clerkMiddleware} from "@clerk/express";     //supports the authenticatio
 
 import userRoutes from  './routes/user.route.js';
 import postRoutes from  './routes/post.route.js';
+import commentRoutes from './routes/comment.route.js';
 
 import {ENV} from "./config/env.js";
 import { connectDB } from "./config/db.js";
@@ -21,10 +22,12 @@ app.get("/", (req, res) => res.send("Hello form server"));
 app.use("/api/users", userRoutes);
 {/** Post Routes */}
 app.use("/api/posts", postRoutes);
+{/** Comments Routes */}
+app.use("/api/comments", commentRoutes);
 
 {/** Error handling middleware */}
 //For debugging purposes
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
     console.log("Unlimited error:", err);
     res.status(500).json({error: err.message || "Internal server error"});
 })
